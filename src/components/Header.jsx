@@ -43,6 +43,18 @@ function Header({ account, setAccount }) {
     getCoinPrice();
   }, []);
 
+  useEffect(() => {
+    if (coinPrice) {
+      let interverId = setInterval(() => {
+        getCoinPrice();
+      }, 1000 * 60 * 5);
+
+      return () => {
+        clearInterval(interverId);
+      };
+    }
+  }, [coinPrice]);
+
   return (
     <header className="max-w-screen-xl mx-auto p-4 flex justify-between">
       <Link to="/">

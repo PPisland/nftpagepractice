@@ -53,13 +53,13 @@ function Main({ account }) {
 
   useEffect(() => {
     getMyNft();
-    console.log("test");
+    // console.log("test");
   }, [account]);
 
   return (
     <div>
       <Intro totalNft={totalNft} mintedNft={mintedNft} myNft={myNft} />
-      <Nfts page={page} />
+      <Nfts page={page} mintedNft={mintedNft} />
     </div>
   );
 }

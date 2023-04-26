@@ -6,14 +6,14 @@ function Intro({ totalNft, mintedNft, myNft }) {
   const ranNum = Math.floor(Math.random() * 1000) + 1;
   const imgSrc = `${process.env.REACT_APP_IMAGE_URL}/${ranNum}.png`;
   return (
-    <div className="bg-black bg-opacity-20">
+    <div className="bg-black bg-opacity-10">
       <div className="max-w-screen-xl mx-auto px-4 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -traslate-y-1/2 text-yellow-500 text-9xl truncate opacity-20 pointer-events-none">
           DA DEN BU
         </div>
-        <div className="relative">
+        <div className="relative py-4">
           <img
-            className="absolute top-2 left-2 w-40 h-40 rounded-md"
+            className="absolute top-6 left-2 w-40 h-40 rounded-md"
             src={imgSrc}
             alt=""
           />
