@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import NftCard from "./NftCard";
 
-function Nfts({ page, mintedNft }) {
+function Nfts2({ page, mintedNft }) {
   const [selectedPage, setSelectedPage] = useState(1);
   const [nfts, setNfts] = useState();
 
@@ -16,7 +16,7 @@ function Nfts({ page, mintedNft }) {
       for (let i = 0; i < 10; i++) {
         const tokenId = i + 1 + (p - 1) * 10;
         let response = await axios.get(
-          `${process.env.REACT_APP_JSON_URL1}/${tokenId}.json`
+          `${process.env.REACT_APP_JSON_URL2}/${tokenId}.json`
         );
         nftArray.push({ tokenId, metadata: response.data });
       }
@@ -80,4 +80,4 @@ function Nfts({ page, mintedNft }) {
   );
 }
 
-export default Nfts;
+export default Nfts2;

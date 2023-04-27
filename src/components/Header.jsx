@@ -56,13 +56,20 @@ function Header({ account, setAccount }) {
   }, [coinPrice]);
 
   return (
-    <header className="max-w-screen-xl mx-auto p-4 flex justify-between">
-      <Link to="/">
-        <button className="flex items center text-sky-500">
-          <SiOpensea size={28} />
-          <div className="text-white text-xl ml-2 font-semibold">OpenSea</div>
-        </button>
-      </Link>
+    <header className="max-w-screen-xl mx-auto p-4 flex justify-between items-center">
+      <div className="flex items-center">
+        <Link to="/">
+          <button className="flex items-center text-sky-500">
+            <SiOpensea size={28} />
+            <div className="text-white text-xl ml-2 font-semibold">OpenSea</div>
+          </button>
+        </Link>
+        <Link to="/collection">
+          <button className="ml-8 px-8 border-l-2 font-semibold">
+            Collection
+          </button>
+        </Link>
+      </div>
       <div className="flex items-center">
         {coinPrice && (
           <ul className="flex text-sm mr-4 font-semibold">

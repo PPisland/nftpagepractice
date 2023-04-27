@@ -1,0 +1,25 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+function Home() {
+  return (
+    <div className="max-w-screen-2xl h-96 mx-auto rounded-2xl  mt-8 relative">
+      <div className="absolute top-4 left-4 w-30 px-4 py-2 bg-white bg-opacity-50 text-white rounded-2xl text-center flex items-center">
+        Mint Live
+        <div className="w-2 h-2 bg-gradient-to-b rounded-full from-green-400 to-green-600 ml-2 animate-ping delay-1000 "></div>
+      </div>
+      <img
+        className="w-full  h-96 object-cover rounded-2xl"
+        src={`${process.env.PUBLIC_URL}/images/8.png`}
+        alt="1"
+      />
+      <Link to="/mint">
+        <button className="absolute right-4 bottom-4 w-30 px-4 py-2 bg-white bg-opacity-50 text-white rounded-2xl text-center hover:bg-white hover:text-black ">
+          Mint Now
+        </button>
+      </Link>
+    </div>
+  );
+}
+
+export default Home;

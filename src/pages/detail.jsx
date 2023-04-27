@@ -5,7 +5,8 @@ import { RxGear } from "react-icons/rx";
 import { GoChevronDown } from "react-icons/go";
 import { GoChevronUp } from "react-icons/go";
 import { BiTagAlt } from "react-icons/bi";
-
+import { SiEthereum } from "react-icons/si";
+import { SlHeart } from "react-icons/sl";
 function Detail() {
   const [metadata, setMetadata] = useState();
   const [trait, setTrait] = useState(false);
@@ -14,7 +15,7 @@ function Detail() {
   const getNft = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
+        `${process.env.REACT_APP_JSON_URL1}/${tokenId}.json`
       );
       // console.log(response);
       setMetadata(response.data);
@@ -35,13 +36,24 @@ function Detail() {
       {metadata ? (
         <>
           <div className="max-w-[512px]">
-            <img
-              className="rounded-xl"
-              src={metadata.image}
-              alt={metadata.name}
-            />
-            <div className="rounded-xl bg-white bg-opacity-60 text-gray-900">
-              <div className="mx-2 pt-4 border-b-2 flex justify-between items-center">
+            <div className="rounded-t-xl bg-white bg-opacity-60 text-gray-900">
+              <div className="mx-4 py-2 border-b-2 flex justify-between items-center">
+                <div className="hover:text-red-500">
+                  <SiEthereum size={18} />
+                </div>
+                <button
+                  onMouseEnter={() => {
+                    console.log("test");
+                  }}
+                  className="hover:text-red-500  "
+                >
+                  <SlHeart size={18} />
+                </button>
+              </div>
+            </div>
+            <img className="" src={metadata.image} alt={metadata.name} />
+            <div className="rounded-b-xl bg-white bg-opacity-60 text-gray-900">
+              <div className="mx-2 pt-2 border-b-2 flex justify-between items-center">
                 <div className="font-bold pb-2 flex items-center">
                   <div className="mr-1 text-black">
                     <BiTagAlt size={18} />

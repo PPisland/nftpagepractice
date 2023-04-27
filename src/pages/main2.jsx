@@ -1,14 +1,16 @@
 import React from "react";
-import Intro from "../components/Intro";
+
 import Web3 from "web3";
-import { CONTRACT_ABI1, CONTRACT_ADDRESS1 } from "../web3.config";
+import { CONTRACT_ABI2, CONTRACT_ADDRESS2 } from "../web3.config";
 import { useState } from "react";
 import { useEffect } from "react";
-import Nfts from "../components/Nfts";
+
+import Nfts2 from "../components/Nfts2";
+import Intro2 from "../components/Intro2";
 
 const web3 = new Web3(window.ethereum);
-const contract = new web3.eth.Contract(CONTRACT_ABI1, CONTRACT_ADDRESS1);
-function Main({ account }) {
+const contract = new web3.eth.Contract(CONTRACT_ABI2, CONTRACT_ADDRESS2);
+function Main2({ account }) {
   const [totalNft, setTotalNft] = useState(0);
   const [mintedNft, setMintedNft] = useState(0);
   const [myNft, setMyNft] = useState(0);
@@ -58,10 +60,10 @@ function Main({ account }) {
 
   return (
     <div>
-      <Intro totalNft={totalNft} mintedNft={mintedNft} myNft={myNft} />
-      <Nfts page={page} mintedNft={mintedNft} />
+      <Intro2 totalNft={totalNft} mintedNft={mintedNft} myNft={myNft} />
+      <Nfts2 page={page} mintedNft={mintedNft} />
     </div>
   );
 }
 
-export default Main;
+export default Main2;
