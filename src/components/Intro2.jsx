@@ -5,25 +5,25 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function Intro2({ totalNft, mintedNft, myNft }) {
-  const [ranNum, setRanNum] = useState(1);
+  // const [ranNum, setRanNum] = useState(1);
 
-  function getNum() {
-    const ran = Math.floor(Math.random() * 1000) + 1;
-    setRanNum(ran);
-  }
+  // function getNum() {
+  //   const ran = Math.floor(Math.random() * 1000) + 1;
+  //   setRanNum(ran);
+  // }
 
-  useEffect(() => {
-    if (ranNum) {
-      let interverId = setInterval(() => {
-        getNum();
-      }, 1000);
+  // useEffect(() => {
+  //   if (ranNum) {
+  //     let interverId = setInterval(() => {
+  //       getNum();
+  //     }, 1000);
 
-      return () => {
-        clearInterval(interverId);
-      };
-    }
-  }, [ranNum]);
-  const imgSrc = `${process.env.REACT_APP_IMAGE_URL2}/${ranNum}.png`;
+  //     return () => {
+  //       clearInterval(interverId);
+  //     };
+  //   }
+  // }, [ranNum]);
+  // const imgSrc = `${process.env.PUBLIC_URL}/.png`;
   return (
     <div className="bg-white bg-opacity-10">
       <div className="max-w-screen-xl mx-auto px-4 relative">
@@ -33,7 +33,7 @@ function Intro2({ totalNft, mintedNft, myNft }) {
         <div className="relative py-4">
           <img
             className="absolute top-6 left-2 w-40 h-40 rounded-md"
-            src={imgSrc}
+            src={`${process.env.PUBLIC_URL}/images/8.png`}
             alt=""
           />
           <div className="w-44 h-44  rounded-md bg-white text-black flex justify-center items-center">

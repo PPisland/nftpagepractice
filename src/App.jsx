@@ -7,6 +7,7 @@ import Landing from "./pages/landing";
 import Main2 from "./pages/main2";
 import Home from "./pages/home";
 import Mint from "./pages/Mint";
+import Detail2 from "./pages/detail2";
 
 function App() {
   const [account, setAccount] = useState("");
@@ -21,6 +22,7 @@ function App() {
           <Route path="/collection" element={<Landing />} />
           <Route path="/mint" element={<Mint account={account} />} />
           <Route path="/main/:tokenId" element={<Detail />} />
+          <Route path="/main2/:tokenId" element={<Detail2 />} />
         </Routes>
       </div>
     </BrowserRouter>

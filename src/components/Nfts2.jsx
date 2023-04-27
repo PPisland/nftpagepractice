@@ -4,6 +4,7 @@ import { useState } from "react";
 // import { SiAxios } from "react-icons/si";
 import axios from "axios";
 import NftCard from "./NftCard";
+import NftCard2 from "./NftCard2.";
 
 function Nfts2({ page, mintedNft }) {
   const [selectedPage, setSelectedPage] = useState(1);
@@ -64,7 +65,7 @@ function Nfts2({ page, mintedNft }) {
         {nfts ? (
           nfts.map((v, i) => {
             return (
-              <NftCard
+              <NftCard2
                 key={i}
                 tokenId={v.tokenId}
                 metadata={v.metadata}
