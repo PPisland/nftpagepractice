@@ -1,6 +1,6 @@
 import React from "react";
 import { IoStar } from "react-icons/io5";
-import { BsCheckCircleFill } from "react-icons/bs";
+import { BsCheckCircle, BsCheckCircleFill } from "react-icons/bs";
 import { useState } from "react";
 import { useEffect } from "react";
 import Web3 from "web3";
@@ -17,7 +17,7 @@ function Mint({ account }) {
   const [totalNft, setTotalNft] = useState(0);
   const [mintedNft, setMintedNft] = useState(0);
   const [metaData, setMetadata] = useState("");
-
+  const [test, setTest] = useState(50);
   const [ranNum, setRanNum] = useState(1);
   const [page, setPage] = useState(1);
 
@@ -85,9 +85,9 @@ function Mint({ account }) {
   };
 
   useEffect(() => {
-    getMintedNft();
     getTotalNft();
-  }, []);
+    getMintedNft();
+  }, [metaData]);
 
   function getNum() {
     const ran = Math.floor(Math.random() * 1000) + 1;
@@ -110,6 +110,12 @@ function Mint({ account }) {
     }
   }, [ranNum]);
 
+  useEffect(() => {
+    if (!mintedNft || !totalNft) return;
+
+    setTest(Math.floor((mintedNft / totalNft) * 125));
+    // console.log(test);
+  }, [mintedNft, totalNft]);
   const imgSrc = `${process.env.REACT_APP_IMAGE_URL2}/${ranNum}.png`;
   return (
     <>
@@ -125,7 +131,7 @@ function Mint({ account }) {
             <img
               className="absolute top-6 left-2 w-28 h-28 rounded-md"
               src={imgSrc}
-              alt=""
+              alt="1"
             />
             <div className="w-32 h-32  rounded-md bg-white text-black flex justify-center items-center">
               Loading...
@@ -179,7 +185,7 @@ function Mint({ account }) {
 
       {page == 1 && (
         <>
-          <div className="m-8 flex">
+          <div className="m-8 mb-20 flex">
             <div className="text-gray-950 max-w-screen-sm">
               <div className="text-3xl font-bold">About this collection</div>
               <div className="mt-2 ">
@@ -216,13 +222,14 @@ function Mint({ account }) {
                   {mintedNft}/{totalNft}
                 </div>
               </div>
-              <div className="w-[500px] bg-gray-200 rounded-full h-2.5 mt-2">
+              <div className="w-[500px] bg-gray-500 rounded-full h-2.5 mt-2">
                 <div
-                  className={`w-[${
-                    (mintedNft / totalNft) * 100
-                  }] bg-blue-600 h-2.5 rounded-full`}
+                  className={`w-[${test * 4}px] bg-blue-600 h-2.5 rounded-full`}
                 ></div>
               </div>
+              {/* <div>
+                <Progress value={40} />
+              </div> */}
               <div className="max-w-[500px] rounded-2xl bg-white bg-opacity-80 mt-4 px-4 py-4">
                 <div className="flex items-center">
                   MINT LIVE
@@ -373,7 +380,53 @@ function Mint({ account }) {
           </div>
         </div>
       )}
-      {page == 4 && <div>4</div>}
+      {page == 4 && (
+        <div className="border-gray-600 rounded-2xl bg-white max-w-md p-4 m-8  text-black">
+          <div className="text-xl font-bold">Road Map</div>
+          <div className="flex-col">
+            <div className="flex justify-between items-center my-2">
+              <div className="flex items-center">
+                <div>
+                  <BsCheckCircleFill />
+                </div>
+                <div className="ml-2 font-semibold">Chapter 1</div>
+                <div className="ml-6 font-base text-gray-400">- JAVASCRIPT</div>
+              </div>
+              <div className="ml-6 font-semibold text-gray-400">ENDED</div>
+            </div>
+            <div className="flex justify-between items-center my-2">
+              <div className="flex items-center">
+                <div>
+                  <BsCheckCircleFill />
+                </div>
+                <div className="ml-2 font-semibold">Chapter 2</div>
+                <div className="ml-6 font-base text-gray-400">- REACT</div>
+              </div>
+              <div className="ml-6 font-semibold text-gray-400">ENDED</div>
+            </div>
+            <div className="flex justify-between items-center my-2">
+              <div className="flex items-center">
+                <div>
+                  <BsCheckCircle />
+                </div>
+                <div className="ml-2 font-semibold">Chapter 3</div>
+              </div>
+              <div className="ml-6 font-semibold text-gray-400">SOLIDITY</div>
+            </div>
+            <div className="flex justify-between items-center my-2">
+              <div className="flex items-center">
+                <div>
+                  <BsCheckCircle />
+                </div>
+                <div className="ml-2 font-semibold">Chapter 4</div>
+              </div>
+              <div className="ml-6 font-semibold text-gray-400">
+                DAPP PROJECT
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

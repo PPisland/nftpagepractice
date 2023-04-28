@@ -8,6 +8,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Pretendard", "Arial", "sans-serif"],
+        display: ["Poppins", "sans-serif"],
+        Ngothic: ["Nanum Gothic", "sans-serif"],
       },
     },
   },

@@ -1,5 +1,5 @@
 import React from "react";
-import { RxGear } from "react-icons/rx";
+import { IoStar } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 function NftCard2({ tokenId, metadata, mintedNft }) {
@@ -16,9 +16,9 @@ function NftCard2({ tokenId, metadata, mintedNft }) {
         alt={metadata.name}
       />
       <div className=" mt-4 text-lg font-bold flex items-center px-4 text-black">
-        Da Den Bu
+        Star Project
         <div className="ml-2 bg-gray-100 w-6 h-6 rounded-full flex justify-center items-center">
-          <RxGear size={16} />
+          <IoStar size={16} />
         </div>
       </div>
       <div className="mt-2 px-4 text-xl font-bold text-black flex justify-between">

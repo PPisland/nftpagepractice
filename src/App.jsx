@@ -8,12 +8,13 @@ import Main2 from "./pages/main2";
 import Home from "./pages/home";
 import Mint from "./pages/Mint";
 import Detail2 from "./pages/detail2";
+import Footer from "./components/Footer";
 
 function App() {
   const [account, setAccount] = useState("");
   return (
     <BrowserRouter>
-      <div className="bg-gradient-to-b from-gray-700 to-transparent min-h-screen text-white ">
+      <div className="bg-gradient-to-b from-gray-700 to-transparent min-h-screen text-white  ">
         <Header account={account} setAccount={setAccount} />
         <Routes>
           <Route path="/" element={<Home account={account} />} />

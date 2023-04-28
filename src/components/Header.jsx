@@ -56,11 +56,13 @@ function Header({ account, setAccount }) {
   }, [coinPrice]);
 
   return (
-    <header className="max-w-screen-xl mx-auto p-4 flex justify-between items-center">
+    <header className="max-w-screen-xl mx-auto p-4 flex justify-between items-center font-display">
       <div className="flex items-center">
         <Link to="/">
-          <button className="flex items-center text-sky-500">
-            <SiOpensea size={28} />
+          <button className="flex items-center text-sky-500 ">
+            <div className="w-[31px] h-[31px] rounded-full flex justify-center items-center bg-white">
+              <SiOpensea size={32} />
+            </div>
             <div className="text-white text-xl ml-2 font-semibold">OpenSea</div>
           </button>
         </Link>
