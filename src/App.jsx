@@ -14,7 +14,7 @@ function App() {
   const [account, setAccount] = useState("");
   return (
     <BrowserRouter>
-      <div className="bg-gradient-to-b from-gray-700 to-transparent min-h-screen text-white  ">
+      <div className="bg-gradient-to-b from-gray-700 to-transparent  min-h-screen text-white  ">
         <Header account={account} setAccount={setAccount} />
         <Routes>
           <Route path="/" element={<Home account={account} />} />

@@ -102,7 +102,7 @@ function Mint({ account }) {
     if (ranNum) {
       let interverId = setInterval(() => {
         getNum();
-      }, 100000);
+      }, 10000);
 
       return () => {
         clearInterval(interverId);
