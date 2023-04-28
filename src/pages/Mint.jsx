@@ -9,6 +9,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { GoChevronDown } from "react-icons/go";
 import { GoChevronUp } from "react-icons/go";
+import MintCard from "../components/MintCard";
 
 const web3 = new Web3(window.ethereum);
 const contract = new web3.eth.Contract(CONTRACT_ABI2, CONTRACT_ADDRESS2);
@@ -20,6 +21,8 @@ function Mint({ account }) {
   const [test, setTest] = useState(50);
   const [ranNum, setRanNum] = useState(1);
   const [page, setPage] = useState(1);
+  const [count, setCount] = useState(1);
+  const [nfts, setNfts] = useState();
 
   const [faq1, setFaq1] = useState(false);
   const [faq2, setFaq2] = useState(false);
@@ -59,26 +62,51 @@ function Mint({ account }) {
     }
   };
 
+  const onCountDown = () => {
+    if (count < 1) return;
+
+    setCount(count - 1);
+  };
+
+  const onCountUp = () => {
+    if (count > 2) return;
+    setCount(count + 1);
+  };
+
   const onClickMint = async () => {
     try {
       if (!account) return;
 
       // const uri =
       //   "https://gateway.pinata.cloud/ipfs/QmS52L4KQFfcJFupGuCeG2J6ubC7gavWDM845oEQUk5azc";
-      const mintNft = await contract.methods.mintNft().send({ from: account });
+      const mintNft = await contract.methods
+        .batchMint(count)
+        .send({ from: account });
       // console.log(mintNft);
       if (!mintNft.status) return;
+
       const balanceOf = await contract.methods.balanceOf(account).call();
       const tokenOfOwnerByIndex = await contract.methods
         .tokenOfOwnerByIndex(account, parseInt(balanceOf) - 1)
         .call();
 
-      const tokenURI = await contract.methods
-        .tokenURI(tokenOfOwnerByIndex)
-        .call();
-      const response = await axios.get(tokenURI);
-      // console.log(response);
-      setMetadata(response.data);
+      // const tokenURI = await contract.methods
+      //   .tokenURI(tokenOfOwnerByIndex)
+      //   .call();
+      // const response = await axios.get(tokenURI);
+      // // console.log(response);
+      // setMetadata(response.data);
+      let nftArray = [];
+      setNfts();
+      for (let i = 0; i < count; i++) {
+        const tokenId = tokenOfOwnerByIndex - (count - 1) + i;
+        let response = await axios.get(
+          `${process.env.REACT_APP_JSON_URL2}/${tokenId}.json`
+        );
+        nftArray.push({ tokenId, metadata: response.data });
+      }
+      setNfts(nftArray);
+      console.log(nfts);
     } catch (error) {
       console.error(error);
     }
@@ -102,7 +130,7 @@ function Mint({ account }) {
     if (ranNum) {
       let interverId = setInterval(() => {
         getNum();
-      }, 10000);
+      }, 100000);
 
       return () => {
         clearInterval(interverId);
@@ -235,42 +263,51 @@ function Mint({ account }) {
                   MINT LIVE
                   <div className="w-2 h-2 bg-gradient-to-b rounded-full from-green-400 to-green-600 ml-2 animate-ping delay-1000 "></div>
                 </div>
-                <button
-                  onClick={onClickMint}
-                  className="mt-2 px-4 py-4  rounded-md  bg-sky-500  text-white  hover:bg-sky-400"
-                >
-                  MINT
-                </button>
+                <div className="flex items-center mt-4">
+                  <div className="flex mt-2">
+                    <button
+                      onClick={onCountDown}
+                      className="w-[60px] h-[56px] border-2 border-gray-100 rounded-l-2xl font-bold"
+                    >
+                      -
+                    </button>
+                    <div className="w-[70px] h-[56px] border-y-2 border-gray-100  flex justify-center items-center font-bold ">
+                      {count}
+                    </div>
+                    <button
+                      onClick={onCountUp}
+                      className="w-[60px] h-[56px] border-2 border-gray-100 rounded-r-2xl font-bold"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button
+                    disabled={count == 0}
+                    onClick={onClickMint}
+                    className="mt-2 ml-4 px-4 py-4  rounded-md  bg-sky-500  text-white  hover:bg-sky-400"
+                  >
+                    MINT
+                  </button>
+                </div>
               </div>
             </div>
             {/* info2 */}
-            <div className="m-4  bg-white text-gray-950 rounded-2xl">
-              {metaData && (
-                <div className="m-4 flex-col items-center ">
-                  <div className="font-bold text-lg pb-[4px] text-center">
-                    Name : {metaData.name}
-                  </div>
-                  <img
-                    className="w-[256px] h-[256px]"
-                    src={metaData.image}
-                    alt="1"
-                  />
-                  <div>
-                    {metaData.attributes.map((v, i) => {
-                      return (
-                        <div
-                          key={i}
-                          className="mt-2 border-b-[1px] border-black flex-col"
-                        >
-                          <span>{v.trait_type} : </span>
-                          <span>{v.value}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-              <div></div>
+            <div>
+              <div className="flex">
+                {nfts ? (
+                  nfts.map((v, i) => {
+                    return (
+                      <MintCard
+                        key={i}
+                        tokenId={v.tokenId}
+                        metadata={v.metadata}
+                      />
+                    );
+                  })
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
           </div>
         </>
