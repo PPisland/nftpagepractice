@@ -19,7 +19,7 @@ function Mint({ account }) {
   const [mintedNft, setMintedNft] = useState(0);
   const [metaData, setMetadata] = useState("");
   const [test, setTest] = useState(50);
-  const [ranNum, setRanNum] = useState(1);
+  // const [ranNum, setRanNum] = useState(1);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(1);
   const [nfts, setNfts] = useState();
@@ -28,6 +28,8 @@ function Mint({ account }) {
   const [faq2, setFaq2] = useState(false);
   const [faq3, setFaq3] = useState(false);
   const [faq4, setFaq4] = useState(false);
+
+  // const imgSrc = `${process.env.REACT_APP_IMAGE_URL1}/${ranNum}.png`;
 
   const onClickFaq1 = () => {
     setFaq1(!faq1);
@@ -117,26 +119,26 @@ function Mint({ account }) {
     getMintedNft();
   }, [metaData]);
 
-  function getNum() {
-    const ran = Math.floor(Math.random() * 1000) + 1;
-    setRanNum(ran);
-  }
+  // function getNum() {
+  //   const ran = Math.floor(Math.random() * 1000) + 1;
+  //   setRanNum(ran);
+  // }
 
   const onClickPage = (p) => () => {
     return setPage(p);
   };
 
-  useEffect(() => {
-    if (ranNum) {
-      let interverId = setInterval(() => {
-        getNum();
-      }, 100000);
+  // useEffect(() => {
+  //   if (ranNum) {
+  //     let interverId = setInterval(() => {
+  //       getNum();
+  //     }, 100000);
 
-      return () => {
-        clearInterval(interverId);
-      };
-    }
-  }, [ranNum]);
+  //     return () => {
+  //       clearInterval(interverId);
+  //     };
+  //   }
+  // }, [ranNum]);
 
   useEffect(() => {
     if (!mintedNft || !totalNft) return;
@@ -144,6 +146,7 @@ function Mint({ account }) {
     setTest(Math.floor((mintedNft / totalNft) * 125));
     // console.log(test);
   }, [mintedNft, totalNft]);
+  const ranNum = Math.floor(Math.random() * 1000) + 1;
   const imgSrc = `${process.env.REACT_APP_IMAGE_URL2}/${ranNum}.png`;
   return (
     <>
@@ -288,6 +291,10 @@ function Mint({ account }) {
                   >
                     MINT
                   </button>
+                  <div className="ml-4 h-[56px] mt-1 text-gray-300 border-y-2 py-4 border-gray-200">
+                    {" "}
+                    Max Mint : 3
+                  </div>
                 </div>
               </div>
             </div>
